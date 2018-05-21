@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sydney Car Parks</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="{{ url_for('static', filename='scripts/jquery.js') }}"></script>
+    </head>
+    <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CPS</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Check Car Park Availability <span class="sr-only">(current)</span></a></li>
+              <li><a href="{{ url_for('connect')}}">Connect to Car Park</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{{ url_for('admin')}}">Admin Login</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <div class="row">
+        <div class="col-xs-6 col-md-3 col-lg-offset-1">
+          <div  class="thumbnail">
+            <a href="#"> <h1><b> Car Park 1 </b></h1></a>
+            <p> Address: 31 Abercrombie St Chippendale </p>
+            <p> Total Capcity: {{carParkData[0]['max']}} </p>
+            <p> Availability: {{carParkData[0]['capacity']}} </p>
+            <p> Price per hour: {{carParkData[0]['price']}}$ </p>
+            <p> Battery Level: {{carParkData[0]['batteryLevel']}} </p>
+            <p> Motion Level: {{carParkData[0]['motionLevel']}} </p>
+            <p> Temperature: {{carParkData[0]['temperature']}} </p>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <div  class="thumbnail">
+            <a href="#"> <h1><b> Car Park 2 </b></h1></a>
+            <p> Address: 21 Nowhere Av Glebe </p>
+            <p> Total Capcity: {{carParkData[1]['max']}} </p>
+            <p> Availability: {{carParkData[1]['capacity']}} </p>
+            <p> Price per hour: {{carParkData[1]['price']}}$ </p>
+            <p> Battery Level: {{carParkData[1]['batteryLevel']}} </p>
+            <p> Motion Level: {{carParkData[1]['motionLevel']}} </p>
+            <p> Temperature: {{carParkData[1]['temperature']}} </p>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+          <div  class="thumbnail">
+            <a href="#"> <h1><b> Car Park 3 </b></h1></a>
+            <p> Address: 31 Somewhere Rd Ultimo </p>
+            <p> Total Capcity: {{carParkData[2]['max']}} </p>
+            <p> Availability: {{carParkData[2]['capacity']}} </p>
+            <p> Price per hour: {{carParkData[2]['price']}}$ </p>
+            <p> Battery Level: {{carParkData[2]['batteryLevel']}} </p>
+            <p> Motion Level: {{carParkData[2]['motionLevel']}} </p>
+            <p> Temperature: {{carParkData[2]['temperature']}} </p>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-3 col-lg-offset-4">
+          <div  class="thumbnail">
+            <a href="#"> <h1><b> Car Park 4 </b></h1></a>
+            <p> Address: 31 Righthere Cl Darlington </p>
+            <p> Total Capcity: {{carParkData[3]['max']}} </p>
+            <p> Availability: {{carParkData[3]['capacity']}} </p>
+            <p> Price per hour: {{carParkData[3]['price']}}$ </p>
+            <p> Battery Level: {{carParkData[3]['batteryLevel']}} </p>
+            <p> Motion Level: {{carParkData[3]['motionLevel']}} </p>
+            <p> Temperature: {{carParkData[3]['temperature']}} </p>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

@@ -1,0 +1,12 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+form {
+  position: relative;
+  margin: 0 auto;
+  padding: 20px 20px 20px;
+  width: 310px;
+  background-color: white;
+}

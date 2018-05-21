@@ -1,0 +1,33 @@
+<!DOCTYPE html >
+<html lang='en'>
+
+<head>
+    <title> ATMO </title>
+    <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <div class='container'>
+        <header class='jumbotron'>
+            <nav>
+                <ul class='nav nav-pills pull-right'>
+                    <li class='active'><a href="#">Home</a></li>
+                    <li><a href="{{url_for('sign_in')}}">Search ATMO</a></li>
+                </ul>
+            </nav>
+            <h3> ATMO </h3>
+        </header>
+        <div>
+            <h3 class='text-center'> Atmotube </h3> <br>
+            <p class='text-center'> Data from your devices </p>
+            <br> <br>
+            <div style="text-align:center">
+                <a href="{{url_for('sign_up')}}"> <button class='btn btn-lg btn-primary '>Search Atmotube</button> </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

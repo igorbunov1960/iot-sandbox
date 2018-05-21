@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html lang='en'>
+
+    <head>
+        <title> bucketlist app </title>
+        <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <form method="POST" action="/delete_bucketlist_item/{{bucketlist_name}}/{{bucketlist_item}}">
+            <div>
+                <h4> Delete an item from {{bucketlist_name}} bucketlist</h4>
+                <div>
+                    <input type="name" name='bucketlistItem' class='form-control' placeholder='Item to delete'> <br>
+                    <button type='submit' class='btn btn-primary'>Submit </button>
+        </form>
+        <div>
+            <h4>Items currently in {{bucketlist_name}} bucketlist</h4>
+        </div>
+        <div>
+            <ul>
+                {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}
+                <li> {{bucket.bucketlist_item}} </li>
+                {% endif %} {% endfor %}
+            </ul>
+        </div>
+    </body>
+
+    </html>

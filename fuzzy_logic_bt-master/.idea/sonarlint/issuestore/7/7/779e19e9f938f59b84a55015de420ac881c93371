@@ -1,0 +1,5 @@
+
+zpython:S1542"XRename function "receiveMessages" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(”ù¬‡úÿÿÿÿ8²¢ÿ™²,
+†python:S117"eRename this parameter "targetBluetoothMacAddress" to match the regular expression ^[_a-z][a-z0-9_]*$.(÷¶­Íüÿÿÿÿ8²¢ÿ™²,
+xpython:S1542"VRename function "sendMessageTo" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(÷¶­Íüÿÿÿÿ8²¢ÿ™²,
+‚python:S1542"eRename function "lookUpNearbyBluetoothDevices" to match the regular expression ^[a-z_][a-z0-9_]{2,}$.(‹ô¸õ8²¢ÿ™²,

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+      <script type="text/javascript">
+       $(function() {
+           $('button#my_button').click(function() {
+               $.getJSON("/_hit_button", function(data) {
+                   $('#text').text(data.text);
+               });
+               return false;
+           });
+       });
+      </script>
+  </head>
+  <body>
+      <button id="my_button">foo</button>
+      <div id="text">foobar</div>
+  </body>
+</html>

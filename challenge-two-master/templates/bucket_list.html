@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title> Bucket list </title>
+    <meta charset='utf-8'>
+    <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class='container'>
+        <nav class='jumbotron'>
+            <ul class='nav nav-pills pull-right'>
+                <li class='active'> <a href="{{url_for('view_dreams')}}"> Create </a></li>
+                <li class='active'> <a href="{{url_for('main')}}"> Log out </a></li>
+            </ul>
+            <h2> Bucket List App </h2>
+        </nav>
+        <div>
+            <h2 class='text-center'> <br> Welcome to the bucket list App </h2>
+            <div style='text-align:center'> <br> <br>
+                <a href="{{url_for('view_dreams')}}">
+                    <button class='btn btn-lg btn-primary'> Create Your Dream Bucket</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

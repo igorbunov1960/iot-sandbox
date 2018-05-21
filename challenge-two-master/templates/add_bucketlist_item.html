@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html lang='en'>
+
+    <head>
+        <title> Your dreams </title>
+        <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <form method="POST" action="/add_bucketlist_item/{{bucketlist_name}}">
+            <div>
+                <h4> Add a new item to your {{bucketlist_name}} bucketlist</h4>
+                <div>
+                    <input type="name" name='bucketlistItem' class='form-control' placeholder='Next item in your bucketlist'> <br>
+                    <button type='submit' class='btn btn-primary'>Submit </button>
+        </form>
+        <div>
+            <h4>Current items in {{bucketlist_name}} bucketlist</h4>
+        </div>
+        <div>
+            <ul>
+                {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}
+                <li> {{bucket.bucketlist_item}} </li>
+                {% endif %} {% endfor %}
+            </ul>
+        </div>
+    </body>
+
+    </html>

@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html lang='en'>
+
+    <head>
+        <title> Your dreams </title>
+        <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <form method="POST" action='/your_bucket_list/remove_dream'>
+            <div>
+                <h4>Please Enter the dream you want to remove.</h4>
+                <div>
+                    <input type="name" name='removeDream' class='form-control' placeholder='Your Dream'> <br>
+                    <button type='submit' class='btn btn-primary'>Submit </button>
+        </form>
+        <div>
+            <h3>Your list of dreams</h3>
+        </div>
+        <div>
+            <ul>
+                {% for item in dreams %}
+                <li> {{item}} </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+
+    </html>
