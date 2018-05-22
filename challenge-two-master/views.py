@@ -84,7 +84,7 @@ def add_bucketlist():
         return redirect(url_for("view_bucketlist"))
     return render_template('add_bucketlist.html', buckets = buckets) 
 
-@app.route('/edit_bucketlist', methods=['POST', 'GET'])
+@app.route('/edit_bucketlist', methods=['POST'])
 def edit_bucketlist():
     name = "Thread scan"
     my_thread = MyThread(name)
