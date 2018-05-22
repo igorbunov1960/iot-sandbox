@@ -89,6 +89,8 @@ def edit_bucketlist():
     name = "Thread scan"
     my_thread = MyThread(name)
     my_thread.start()
+    global atmos
+    return jsonify(results=atmos)
 
 @app.route('/trash_counter', methods=['GET'])
 def trash_counter():
