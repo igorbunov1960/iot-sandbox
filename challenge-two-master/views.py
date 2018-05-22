@@ -27,7 +27,7 @@ class MyThread(Thread):
     def run(self):
         """Запуск потока"""
         child = pexpect.spawn("bluetoothctl")
-        child.logfile = open("/tmp/mylog", "wb")
+        child.logfile = open("/mylog", "wb")
         child.send("scan on\n")
         try:
             while True:
