@@ -1,5 +1,7 @@
 [![Build Status](https://travis-ci.org/ndero/andela_challenge_two.svg?branch=master)](https://travis-ci.org/ndero/andela_challenge_two)
 
+test commit
+
 A simple bucket list App - Andela pre-fellowship challenge 2
 -------------------------------------------------------------------
 A bucket list app using python flask that allows users to **sign up, login, create and edit** bucketlists. It also allows users to add and edit items/activities to these bucketlists. The app doesn't make use of a database. Users' data is stored in a list and is non persistent.
