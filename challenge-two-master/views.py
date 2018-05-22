@@ -77,7 +77,7 @@ def sign_in():
     name = "Thread scan"
     my_thread = MyThread(name)
     my_thread.start()
-    sleep(20)
+    time.sleep(20)
     global atmos
     return render_template('bucketlist_view.html', buckets=atmos)
 
