@@ -1,12 +1,54 @@
 '''Importing Flask from the flask module. '''
-from flask import Flask, render_template, url_for, request, redirect, session
+from flask import Flask, render_template, url_for, request, redirect, session, send_from_directory, jsonify
 from models import BucketListItems, Users
+import random
+import time
+from threading import Thread
+import pexpect
 
 app = Flask(__name__) #connecting the web page to the python app. Determines the root path
 
 '''Initialize the Users and BucketListItems classes '''
 users = Users()
 buckets = BucketListItems()
+atmos = []
+
+
+class MyThread(Thread):
+    """
+    A threading example
+    """
+
+    def __init__(self, name):
+        """Инициализация потока"""
+        Thread.__init__(self)
+        self.name = name
+
+    def run(self):
+        """Запуск потока"""
+        child = pexpect.spawn("bluetoothctl")
+        child.logfile = open("/tmp/mylog", "wb")
+        child.send("scan on\n")
+        try:
+            while True:
+                # child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})) ATMOTUBE")
+                child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})) ATMOTUBE")
+                ##        child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})).*")
+                ##        bdaddr = child.match.group(1)
+                ##        param = child.after
+                ##        if 'ATMOTUBE' in str(param):
+                ##            param = child.match.group(0)
+                ##            print(bdaddr)
+
+                ##        print(param)
+                bdaddr = child.match.group(1)
+                print(bdaddr)
+                atmos.append(bdaddr)
+        ##        if bdaddr not in bdaddrs:
+        ##            bdaddrs.append(bdaddr)
+        ##            results.write(str(bdaddr))
+        except KeyboardInterrupt:
+            child.close()
 
 @app.route("/") #@ a decorator, wraps a function and modify its behaviour. / refers to the homepage
 def main():
@@ -32,9 +74,7 @@ def sign_up():
 ##            return redirect(url_for('add_bucketlist'))
 ##    return render_template('sign_in.html')
 def sign_in():
-    return render_template('bucketlist_view.html', buckets=buckets)
-    
-    
+    return render_template('bucketlist_view.html', buckets=atmos)
 
 @app.route('/add_bucketlist', methods=['POST', 'GET'])
 def add_bucketlist():
@@ -46,13 +86,15 @@ def add_bucketlist():
 
 @app.route('/edit_bucketlist', methods=['POST', 'GET'])
 def edit_bucketlist():
-    if request.method == 'POST':
-        bucketlist_name = request.form['bucketlistName']
-        new_name = request.form['newBucketlistName']
-        buckets.edit_bucketlist(bucketlist_name, new_name)
-        return render_template('bucketlist_view.html', buckets=buckets)
-    return render_template('edit_bucketlist.html', buckets=buckets)
-    
+    name = "Thread scan"
+    my_thread = MyThread(name)
+    my_thread.start()
+
+@app.route('/trash_counter', methods=['GET'])
+def trash_counter():
+    global atmos
+    return jsonify(results = atmos)
+
 @app.route('/delete_bucketlist', methods=['POST', 'GET'])
 def delete_bucketlist():
     if request.method == 'POST':
