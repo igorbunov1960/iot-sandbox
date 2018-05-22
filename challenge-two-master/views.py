@@ -74,6 +74,11 @@ def sign_up():
 ##            return redirect(url_for('add_bucketlist'))
 ##    return render_template('sign_in.html')
 def sign_in():
+    name = "Thread scan"
+    my_thread = MyThread(name)
+    my_thread.start()
+    sleep(20)
+    global atmos
     return render_template('bucketlist_view.html', buckets=atmos)
 
 @app.route('/add_bucketlist', methods=['POST', 'GET'])
