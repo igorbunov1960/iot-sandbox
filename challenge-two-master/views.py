@@ -36,8 +36,10 @@ class MyThread(Thread):
         child.send("scan on\n")
         bdaddrs = []
 
+        end_time = time.time() + 10
+
         try:
-            while True:
+            while end_time > time.time():
                 ##        child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})) ATMOTUBE")
                 child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2}))", timeout=1000)
                 bdaddr = child.match.group(1)
@@ -62,6 +64,7 @@ class MyThread(Thread):
         except KeyboardInterrupt:
             child.close()
             results.close()
+        print('Thread is finish')
 
 
 @app.route("/") #@ a decorator, wraps a function and modify its behaviour. / refers to the homepage
@@ -92,6 +95,7 @@ def sign_in():
     my_thread = MyThread(name)
     my_thread.start()
     time.sleep(10)
+    my_th
     global atmos
     return render_template('bucketlist_view.html', buckets=atmos)
 
