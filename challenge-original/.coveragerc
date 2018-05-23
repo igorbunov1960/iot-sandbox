@@ -1,0 +1,16 @@
+[report]
+omit =
+	*html*
+    *tests/*
+    *site-packages/*
+    *asyncio\*
+    *ctypes*
+    *concurrent*
+    *multiprocessing*
+    *hmac*
+    *uuid*
+    *decimal*
+    *mimetypes*
+    *numbers*
+
+

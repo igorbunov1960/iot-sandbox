@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bucket List App</title>
+
+    <!-- css styling sheet and bootstrap sources-->
+    <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header jumbotron ">
+            <nav>
+                <ul class="nav nav-pills pull-right">
+                    <li><a href="{{url_for('main')}}">Home</a></li>
+                    <li><a href="{{url_for('sign_in')}}">Sign In</a></li>
+                    <li class="active"><a href="#">Sign Up</a></li>
+                </ul>
+            </nav>
+            <h3 class="text-left">Bucket List App</h3>
+        </div>
+        <form method='POST' action="{{url_for('sign_up')}}">
+            <div>
+                <h1>Bucket List App</h1>
+                <p> Sign up today. </p>
+                <input type="name" name="inputName" class="form-control" placeholder="Name">
+                <input type="email" name="inputEmail" class="form-control" placeholder="Email address">
+                <input type="password" name="inputPassword" class="form-control" placeholder="Password">
+                <br>
+                <button type='submit' class="btn btn-lg btn-primary" type="button">Sign up</button>
+            </div>
+        </form>
+
+    </div>
+</body>
+
+</html>

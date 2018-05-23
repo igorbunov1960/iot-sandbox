@@ -1,0 +1,33 @@
+<DOCTYPE html>
+    <html lang='en'>
+
+    <head>
+        <title> Your dreams </title>
+        <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <div class="container">
+            <header class='jumbotron'>
+                <nav>
+                    <ul class='nav nav-pills pull-right'>
+                        <li> <a href="{{url_for('show_add_dream')}}">Add Dream</a></li>
+                        <li> <a href="{{url_for('show_remove_dream')}}"> Remove Dream </a></li>
+                        <li> <a href="{{url_for('main')}}"> Log Out </a></li>
+                    </ul>
+                </nav>
+                <h3> Bucket List App - Your dreams list</h3>
+            </header>
+            <div>
+                <ul>
+                    {% for item in dreams %}
+                    <li> {{item}} </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </body>
+
+    </html>

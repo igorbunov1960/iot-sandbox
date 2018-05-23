@@ -8,24 +8,24 @@
     </head>
 
     <body>
-        <form method="POST" action="/edit_bucketlist_item/{{bucketlist_name}}">
+        <form method="POST" action="/edit_bucketlist_item/{{bucketlist_name}}/{{bucketlist_item}}">
             <div>
                 <h4>Rename your Items.</h4>
                 <div>
-                    <input type="name" name='bucketlistItem' class='form-control' placeholder='Item to be renamed'>  <br>
+                    <input type="name" name='bucketlistItem' class='form-control' placeholder='Item to be renamed'> <br>
                     <input type="name" name='newBucketlistItemName' class='form-control' placeholder='New item name'> <br>
                     <button type='submit' class='btn btn-primary'>Submit </button>
         </form>
         <div>
             <h3>Items in {{bucketlist_name}}</h3>
         </div>
-{#        <div>
+        <div>
             <ul>
                 {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}
                 <li> {{bucket.bucketlist_item}} </li>
                 {% endif %} {% endfor %}
             </ul>
-        </div>#}
+        </div>
     </body>
 
     </html>

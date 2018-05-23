@@ -1,0 +1,36 @@
+<!DOCTYPE html >
+<html lang='en'>
+
+<head>
+    <title> Bucket list app </title>
+    <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+
+</head>
+
+<body>
+    <div class='container'>
+        <header class='jumbotron'>
+            <nav>
+                <ul class='nav nav-pills pull-right'>
+                    <li class='active'><a href="#">Home</a></li>
+                    <li><a href="{{url_for('sign_in')}}">Sign In</a></li>
+                    <li><a href="{{url_for('sign_up')}}">Sign Up</a></li>
+                </ul>
+            </nav>
+            <h3> Bucket List App </h3>
+        </header>
+        <div>
+            <h3 class='text-center'> Do you have big dreams? </h3> <br>
+            <p class='text-center'>
+                Imagine if you could be able to immortalise your dreams, keep track of them and share with your friends.
+                <br> The bucket list app does just that for you. </p>
+            <br> <br>
+            <div style="text-align:center">
+                <a href="{{url_for('sign_up')}}"> <button class='btn btn-lg btn-primary '>Sign up today</button> </a>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+<DOCTYPE html>
+    <html lang='en'>
+
+    <head>
+        <title> Your dreams </title>
+        <link href="{{url_for('static', filename='one.css')}}" rel='stylesheet'>
+        <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    </head>
+
+    <body>
+        <form method="POST" action="{{url_for('delete_bucketlist')}}">
+            <div>
+                <h4>Please Enter the name of the bucket list that you want to delete</h4>
+                <div>
+                    <input type="name" name='bucketlistName' class='form-control' placeholder='bucketlist name'> <br>
+                    <button type='submit' class='btn btn-primary'>Submit </button>
+        </form>
+        <div>
+            <h3>Your bucketlists</h3>
+        </div>
+        <div>
+            <ul>
+                {% for bucket in buckets.bucketlists %}
+                <li> {{bucket}} </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </body>
+
+    </html>

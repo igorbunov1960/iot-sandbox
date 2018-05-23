@@ -1,68 +1,12 @@
 '''Importing Flask from the flask module. '''
-from flask import Flask, render_template, url_for, request, redirect, session, send_from_directory, jsonify
+from flask import Flask, render_template, url_for, request, redirect, session
 from models import BucketListItems, Users
-import random
-import time
-from threading import Thread
-import pexpect
 
 app = Flask(__name__) #connecting the web page to the python app. Determines the root path
 
 '''Initialize the Users and BucketListItems classes '''
 users = Users()
 buckets = BucketListItems()
-atmos = []
-
-js_script_result = open("js_script_result.txt", 'w')
-js_script_result.close()
-
-
-class MyThread(Thread):
-    """
-    A threading example
-    """
-
-    def __init__(self, name):
-        """Инициализация потока"""
-        Thread.__init__(self)
-        self.name = name
-
-    def run(self):
-        """Запуск потока"""
-        results = open("scan_results.txt", 'w')
-        results.close()
-        child = pexpect.spawn("bluetoothctl")
-        child.logfile = open("/tmp/mylog", "wb")
-        child.send("scan on\n")
-        bdaddrs = []
-
-        try:
-            while True:
-                ##        child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2})) ATMOTUBE")
-                child.expect("Device (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2}))", timeout=1000)
-                bdaddr = child.match.group(1)
-                results = open("scan_results.txt", 'a')
-                results.write(str(bdaddr))
-                results.close()
-                atmos.append(bdaddr.decode('utf-8'))
-                print(bdaddr)
-
-
-        ##        bdaddr = child.match.group(1)
-        ##        param = child.after
-        ##        if 'ATMOTUBE' in str(param):
-        ##            param = child.match.group(0)
-        ##            print(bdaddr)
-
-        ##        print(param)
-
-        ##        if bdaddr not in bdaddrs:
-        ##            bdaddrs.append(bdaddr)
-        ##            results.write(str(bdaddr))
-        except KeyboardInterrupt:
-            child.close()
-            results.close()
-
 
 @app.route("/") #@ a decorator, wraps a function and modify its behaviour. / refers to the homepage
 def main():
@@ -79,21 +23,14 @@ def sign_up():
     return render_template('sign_up.html')
 
 @app.route('/sign_in', methods = ['POST', 'GET']) #sign in page
-##def sign_in():
-##    if request.method == 'POST':
-##        email = request.form['inputEmail']
-##        password = request.form['inputPassword']
-##        if users.validate_login(email, password) == 'login successful':
-##            session['email'] = email
-##            return redirect(url_for('add_bucketlist'))
-##    return render_template('sign_in.html')
 def sign_in():
-    name = "Thread scan"
-    my_thread = MyThread(name)
-    my_thread.start()
-    time.sleep(10)
-    global atmos
-    return render_template('bucketlist_view.html', buckets=atmos)
+    if request.method == 'POST':
+        email = request.form['inputEmail']
+        password = request.form['inputPassword']
+        if users.validate_login(email, password) == 'login successful':
+            session['email'] = email
+            return redirect(url_for('add_bucketlist'))
+    return render_template('sign_in.html')
 
 @app.route('/add_bucketlist', methods=['POST', 'GET'])
 def add_bucketlist():
@@ -103,25 +40,15 @@ def add_bucketlist():
         return redirect(url_for("view_bucketlist"))
     return render_template('add_bucketlist.html', buckets = buckets) 
 
-@app.route('/edit_bucketlist', methods=['POST'])
+@app.route('/edit_bucketlist', methods=['POST', 'GET'])
 def edit_bucketlist():
-    name = "Thread scan"
-    my_thread = MyThread(name)
-    my_thread.start()
-    # global atmos
-    # return jsonify(results=atmos)
-
-@app.route('/trash_counter', methods=['GET'])
-def trash_counter():
-    global atmos
-
-    for atmo in atmos:
-        js_script_result = open("js_script_result.txt", 'a')
-        js_script_result.write(str(atmo))
-        js_script_result.close()
-
-    return jsonify(results = atmos)
-
+    if request.method == 'POST':
+        bucketlist_name = request.form['bucketlistName']
+        new_name = request.form['newBucketlistName']
+        buckets.edit_bucketlist(bucketlist_name, new_name)
+        return render_template('bucketlist_view.html', buckets=buckets)
+    return render_template('edit_bucketlist.html', buckets=buckets)
+    
 @app.route('/delete_bucketlist', methods=['POST', 'GET'])
 def delete_bucketlist():
     if request.method == 'POST':
@@ -150,8 +77,8 @@ def edit_bucketlist_item(bucketlist_name, bucketlist_item):
         bucketlist_item = request.form['bucketlistItem']
         new_name = request.form['newBucketlistItemName']
         buckets.edit_bucketlist_item(bucketlist_name, bucketlist_item, new_name)
-        return render_template('bucketlist_item_view.html', buckets=buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item)
-    return render_template('edit_bucketlist_item.html', buckets = buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item)
+        return render_template('bucketlist_item_view.html', buckets=buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item) 
+    return render_template('edit_bucketlist_item.html', buckets = buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item)   
 
 @app.route('/delete_bucketlist_item/<bucketlist_name>/<bucketlist_item>', methods = ["GET", "POST"])
 def delete_bucketlist_item(bucketlist_name, bucketlist_item):
@@ -161,13 +88,13 @@ def delete_bucketlist_item(bucketlist_name, bucketlist_item):
         return render_template("bucketlist_item_view.html", buckets=buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item)
     return render_template('delete_bucketlist_item.html', buckets=buckets, bucketlist_name=bucketlist_name, bucketlist_item=bucketlist_item)
 
-##@app.route('/view_buckelist', methods=['GET'])
-##def view_bucketlist():
-##    return render_template('bucketlist_view.html', buckets=buckets)
+@app.route('/view_buckelist', methods=['GET'])
+def view_bucketlist():
+    return render_template('bucketlist_view.html', buckets=buckets)
 
 @app.route('/view_bucketlist_item/<bucketlist_name>', methods=["GET"])
 def view_bucketlist_items(bucketlist_name):
-    return render_template('bucketlist_item_view.html', buckets = buckets, bucketlist_name = bucketlist_name)
+    return render_template('bucketlist_item_view.html', buckets= buckets, bucketlist_name = bucketlist_name)
 
 app.config.from_object('config') #secret key for session management.
 
