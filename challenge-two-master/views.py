@@ -167,6 +167,44 @@ def delete_bucketlist_item(bucketlist_name, bucketlist_item):
 
 @app.route('/view_bucketlist_item/<bucketlist_name>', methods=["GET"])
 def view_bucketlist_items(bucketlist_name):
+    atmo_prop = open('atmo_prop.txt', 'w')
+    atmo_prop.close()
+
+    send_line = 'gatttool -t random -b ' + bucketlist_name + ' -I'
+    gatt = pexpect.spawn(send_line)
+    gatt.sendline('connect')
+    gatt.expect('Connection successful')
+    print("success!")
+    gatt.sendline('char-read-uuid db450002-8e9a-4818-add7-6ed94a328ab2')
+    gatt.expect('value.*')
+    param = gatt.after
+    param = int(param.split()[1], 16)
+
+    def saveData(data):
+        atmo_prop = open('atmo_prop.txt', 'a')
+        atmo_prop.write(data)
+        atmo_prop.close()
+        print(data)
+
+    data = 'VOC: ' + str(param)
+    saveData(data)
+
+    gatt.sendline('char-read-uuid db450003-8e9a-4818-add7-6ed94a328ab2')
+    gatt.expect('value.*')
+    param = gatt.after
+    param = int(param.split()[1], 16)
+
+    data = '\nHumidity: ' + str(param)
+    saveData(data)
+
+    gatt.sendline('char-read-uuid db450004-8e9a-4818-add7-6ed94a328ab2')
+    gatt.expect('value.*')
+    param = gatt.after
+    param = int(param.split()[1], 16)
+
+    data = '\nTemperature: ' + str(param)
+    saveData(data)
+
     return render_template('bucketlist_item_view.html', buckets = buckets, bucketlist_name = bucketlist_name)
 
 app.config.from_object('config') #secret key for session management.
