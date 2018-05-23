@@ -41,6 +41,7 @@ class MyThread(Thread):
                 results = open("scan_results.txt", 'a')
                 results.write(str(bdaddr))
                 results.close()
+                atmos.append(bdaddr)
                 print(bdaddr)
 
 
