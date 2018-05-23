@@ -20,24 +20,24 @@
                 <h3> Bucket List App </h3>
             </header>
             <h2> {{bucketlist_name}} </h2>
-            <div>
-                <table class="table table-stripped">
-                    <th>Item </th>
-                    <th><a href='#' class='btn btn-info btn-sm'><span class="graphicon graphicon-trash"></span>Edit </a></th>
-                    <th><a href="#" class='btn btn-info btn-sm'><span class="graphicon graphicon-trash"></span> Delete </a></th>
-
-                    {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}
-
-                    <tr>
-                        <td> {{bucket.bucketlist_item}} </td>
-                        <td>
-                            <a href="/edit_bucketlist_item/{{bucket.bucketlist_name}}/{{bucket.bucketlist_item}}"> <span class='glyphicon glyphicon-pencil'></span> </a>
-                        </td>
-                        <td> <a href="/delete_bucketlist_item/{{bucket.bucketlist_name}}/{{bucket.bucketlist_item}}"><span class='glyphicon glyphicon-trash'></span> </a></td>
-                    </tr>
-                    {% endif %} {% endfor %}
-                </table>
-            </div>
+{#            <div>#}
+{#                <table class="table table-stripped">#}
+{#                    <th>Item </th>#}
+{#                    <th><a href='#' class='btn btn-info btn-sm'><span class="graphicon graphicon-trash"></span>Edit </a></th>#}
+{#                    <th><a href="#" class='btn btn-info btn-sm'><span class="graphicon graphicon-trash"></span> Delete </a></th>#}
+{##}
+{#                    {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}#}
+{##}
+{#                    <tr>#}
+{#                        <td> {{bucket.bucketlist_item}} </td>#}
+{#                        <td>#}
+{#                            <a href="/edit_bucketlist_item/{{bucket.bucketlist_name}}/{{bucket.bucketlist_item}}"> <span class='glyphicon glyphicon-pencil'></span> </a>#}
+{#                        </td>#}
+{#                        <td> <a href="/delete_bucketlist_item/{{bucket.bucketlist_name}}/{{bucket.bucketlist_item}}"><span class='glyphicon glyphicon-trash'></span> </a></td>#}
+{#                    </tr>#}
+{#                    {% endif %} {% endfor %}#}
+{#                </table>#}
+{#            </div>#}
         </div>
     </body>
 

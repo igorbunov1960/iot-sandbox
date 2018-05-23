@@ -19,13 +19,13 @@
         <div>
             <h3>Items in {{bucketlist_name}}</h3>
         </div>
-{#        <div>
+        <div>
             <ul>
                 {% for bucket in buckets.all_items %} {% if bucket.bucketlist_name == bucketlist_name %}
                 <li> {{bucket.bucketlist_item}} </li>
                 {% endif %} {% endfor %}
             </ul>
-        </div>#}
+        </div>
     </body>
 
     </html>
