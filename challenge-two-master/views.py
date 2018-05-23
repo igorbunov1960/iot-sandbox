@@ -189,24 +189,24 @@ def view_bucketlist_items(bucketlist_name):
         atmo_prop.close()
         print(data)
 
-    voc = 'VOC: ' + str(param)
-    saveData(voc)
+    voc = str(param)
+    saveData('VOC: ' + voc)
 
     gatt.sendline('char-read-uuid db450003-8e9a-4818-add7-6ed94a328ab2')
     gatt.expect('value.*')
     param = gatt.after
     param = int(param.split()[1], 16)
 
-    humidity = '\nHumidity: ' + str(param)
-    saveData(humidity)
+    humidity = str(param)
+    saveData('\nHumidity: ' + humidity)
 
     gatt.sendline('char-read-uuid db450004-8e9a-4818-add7-6ed94a328ab2')
     gatt.expect('value.*')
     param = gatt.after
     param = int(param.split()[1], 16)
 
-    temperature = '\nTemperature: ' + str(param)
-    saveData(temperature)
+    temperature = str(param)
+    saveData('\nTemperature: ' + temperature)
 
     return render_template('bucketlist_item_view.html', bucketlist_name = bucketlist_name, voc = voc, humidity = humidity, temperature = temperature)
 
