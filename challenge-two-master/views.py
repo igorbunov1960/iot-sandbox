@@ -13,6 +13,9 @@ users = Users()
 buckets = BucketListItems()
 atmos = []
 
+js_script_result = open("js_script_result.txt", 'w')
+js_script_result.close()
+
 
 class MyThread(Thread):
     """
@@ -111,6 +114,12 @@ def edit_bucketlist():
 @app.route('/trash_counter', methods=['GET'])
 def trash_counter():
     global atmos
+
+    for atmo in atmos:
+        js_script_result = open("js_script_result.txt", 'a')
+        js_script_result.write(str(atmo))
+        js_script_result.close()
+
     return jsonify(results = atmos)
 
 @app.route('/delete_bucketlist', methods=['POST', 'GET'])

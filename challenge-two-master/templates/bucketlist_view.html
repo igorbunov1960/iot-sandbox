@@ -20,13 +20,13 @@
                 <h3> ATMO </h3>
             </header>
             <h2> Atmotube List </h2>
-            <div>
+            <div id="counter">
                 <table class="table table-stripped">
                     <th> Name </th>
                     <th> IMEI </th>
                     <th> Connect </th>
 
-                    {% for bucket in buckets.bucketlists %}
+                    {% for bucket in buckets %}
                     <tr>
                         <td> <a href="view_bucketlist_item/{{bucket}}">  {{bucket}}  </a></td>
                         <td>
@@ -34,6 +34,7 @@
                         </td>
                         <td> <a href="{{url_for('delete_bucketlist')}}"><span class='glyphicon glyphicon-trash'></span> </a></td>
                     </tr>
+
                     {% endfor %}
                 </table>
             </div>

@@ -4,7 +4,7 @@ $(document).ready(function() {
         $.ajax({
             url: '/trash_counter',
             success: function(data) {
-                $('#counter').html(data.value);
+                $('#counter').html(data);
             },
             complete: function() {
                 // Repeat in 5s
