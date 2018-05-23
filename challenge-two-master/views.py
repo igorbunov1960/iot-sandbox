@@ -189,26 +189,26 @@ def view_bucketlist_items(bucketlist_name):
         atmo_prop.close()
         print(data)
 
-    data = 'VOC: ' + str(param)
-    saveData(data)
+    voc = 'VOC: ' + str(param)
+    saveData(voc)
 
     gatt.sendline('char-read-uuid db450003-8e9a-4818-add7-6ed94a328ab2')
     gatt.expect('value.*')
     param = gatt.after
     param = int(param.split()[1], 16)
 
-    data = '\nHumidity: ' + str(param)
-    saveData(data)
+    humidity = '\nHumidity: ' + str(param)
+    saveData(humidity)
 
     gatt.sendline('char-read-uuid db450004-8e9a-4818-add7-6ed94a328ab2')
     gatt.expect('value.*')
     param = gatt.after
     param = int(param.split()[1], 16)
 
-    data = '\nTemperature: ' + str(param)
-    saveData(data)
+    temperature = '\nTemperature: ' + str(param)
+    saveData(temperature)
 
-    return render_template('bucketlist_item_view.html', buckets = buckets, bucketlist_name = bucketlist_name)
+    return render_template('bucketlist_item_view.html', bucketlist_name = bucketlist_name, voc = voc, humidity = humidity, temperature = temperature)
 
 app.config.from_object('config') #secret key for session management.
 
