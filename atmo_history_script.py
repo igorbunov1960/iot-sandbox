@@ -36,20 +36,36 @@ sendlist = name_bytes + time_ts.to_bytes(4, byteorder = 'big')
 ##name_bytes = name_const.encode('ASCII')
 
 ##send_name = ''
-for x in sendlist:
-    print(x)
+##for x in sendlist:
+##    print(x)
 ##    send_name = send_name + str(int(x))
-cmd = 'const'.encode('ASCII')
-gatt.sendline('char-write-req 0x0011 %s' % ''.join(format(x, '02x') for x in sendlist))       
+##cmd = 'const'.encode('ASCII')
+
+hok_str = 'HOK'
+hok_bytes = hok_str.encode('ASCII')
+print('HOK  %s' % ''.join(format(x, '02x') for x in hok_bytes))
+
+gatt.sendline('char-write-req 0x0011 %s' % ''.join(format(x, '02x') for x in sendlist))
+gatt.expect('Characteristic value was written successfully')
+print("HST sended")
+
 ##print(send_name)
 ##gatt.send('char-write-req 0x0011 ' + str(sendlist))
 ##gatt.expect('Characteristic value was written successfully')
 ##print('Send sync ok')
 ##
+
 while True:
     gatt.expect('value.*', timeout=1000)
     param = gatt.after
+    param = param.split()
     print(param)
+        
+##    gatt.expect("value: (([0-9A-Fa-f]{2}:){5}([0-9A-Fa-f]{2}))", timeout=1000)
+##    bdaddr = gatt.match.group(1)
+##    print(bdaddr)
+            
+##    print(param.decode('utf-8'))
 ##    param = int(param.split()[2], 16)
 ##    data = '\nVOC: ' + str(param) + ' Time: ' + time()
 ##    saveData(data)

@@ -1,0 +1,3 @@
+VOC: 0
+Humidity: 29
+Temperature: 31
